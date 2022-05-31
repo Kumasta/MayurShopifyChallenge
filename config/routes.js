@@ -23,6 +23,7 @@ router.route('/inventory/:id/comments')
 
 router.route('/inventory/:id/comments/:commentId')
   .delete(deleteComment)
+// .delete(restoreComment)
 
 
 export default router

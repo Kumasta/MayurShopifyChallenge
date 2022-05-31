@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import uniqueValidator from 'mongoose-unique-validator'
+import mongooseDelete from 'mongoose-delete'
 
 
 const { Schema } = mongoose
@@ -8,7 +9,7 @@ const { Schema } = mongoose
 ///Comment
 const commentSchema = new Schema({
   text: { type: String, required: true, maxlength: 300 },
-  isDeleted: { type: Boolean, required: true, default: false },
+  // isDeleted: { type: Boolean, required: true, default: false },
 }, {
   timestamps: true,
 })
@@ -35,5 +36,6 @@ commentSchema.set('toJSON', {
 
 // Plugins
 inventorySchema.plugin(uniqueValidator)
+commentSchema.plugin(mongooseDelete)
 
 export default mongoose.model('Inventory', inventorySchema)

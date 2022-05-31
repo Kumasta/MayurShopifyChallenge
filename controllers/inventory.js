@@ -27,7 +27,7 @@ export const getSingleInventory = async (req, res) => {
   try {
     const { id } = req.params
     const inventory = await Inventory.findById(id)
-    console.log(inventory)
+    // console.log(inventory)
     return res.status(200).json(inventory)
   } catch (err) {
     console.log(err)
@@ -92,7 +92,7 @@ export const updateComment = async (req, res) => {
     const { id, reviewId } = req.params
     const inventory = await Inventory.findById(id)
     if (!inventory) throw new Error('Inventory was not found')
-    const commentToUpdate = inventory.reviews.id(reviewId)
+    const commentToUpdate = inventory.commnets.id(reviewId)
     // console.log(commentToUpdate)
     if (!commentToUpdate) throw new Error('No comment found!')
     Object.assign(commentToUpdate, req.body)
@@ -113,11 +113,11 @@ export const deleteComment = async (req, res) => {
     const inventory = await Inventory.findById(id)
     if (!inventory) throw new Error('Inventory not found')
     // id() returns the first item that has a _id field matching the argument
-    const commentToDelete = inventory.reviews.id(commentId)
+    const commentToDelete = inventory.comments.id(commentId)
     // Check commentToDelete is not null
     if (!commentToDelete) throw new Error('Commnet not found')
-    // Remove the review
-    await commentToDelete.remove()
+    // Remove the comment
+    await commentToDelete.delete()
     // Save the movie with the updated path
     await inventory.save()
     // Return response to user
@@ -126,3 +126,4 @@ export const deleteComment = async (req, res) => {
     console.log(err)
   }
 }
+
