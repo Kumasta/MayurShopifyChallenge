@@ -1,0 +1,15 @@
+{
+  "name": "MayurShopifyChallenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Kumasta/MayurShopifyChallenge.git",
+  "author": "Mayur Kumar <mayurtheraj@googlemail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.5",
+    "mongoose-unique-validator": "^3.0.0"
+  }
+}
