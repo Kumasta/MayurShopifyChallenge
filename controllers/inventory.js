@@ -86,6 +86,24 @@ export const addComment = async (req, res) => {
   }
 }
 
+//Update Comment
+export const updateComment = async (req, res) => {
+  try {
+    const { id, reviewId } = req.params
+    const inventory = await Inventory.findById(id)
+    if (!inventory) throw new Error('Inventory was not found')
+    const commentToUpdate = inventory.reviews.id(reviewId)
+    // console.log(commentToUpdate)
+    if (!commentToUpdate) throw new Error('No comment found!')
+    Object.assign(commentToUpdate, req.body)
+    await inventory.save()
+    return res.status(202).json(commentToUpdate)
+  } catch (err) {
+    console.log(err)
+    return res.status(401).json({ message: err.message })
+  }
+}
+
 // Delete Review
 // endpoint: /movies/:id/reviews/:reviewId
 export const deleteComment = async (req, res) => {
