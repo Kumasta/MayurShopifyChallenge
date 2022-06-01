@@ -6,13 +6,11 @@ import './App.css'
 
 const CommentCard = ({ comment }) => {
   return (
-    <>
-      <p>{comment.text}</p>
-    </>
+    <p>{comment.text}</p>
   )
 }
 
-const InventoryItem = ({ item, order }) => {
+const InventoryItem = ({ item, order, updateInvetory, setUpdateInventory }) => {
 
   let [stockCount, setStockCouint] = useState(item.stock)
 
@@ -26,6 +24,16 @@ const InventoryItem = ({ item, order }) => {
     setStockCouint(stockCount -= 1)
     updateStock()
   }
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:4000/inventory/${item.id}`)
+      setUpdateInventory(!updateInvetory)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 
   const updateStock = async () => {
     try {
@@ -43,7 +51,7 @@ const InventoryItem = ({ item, order }) => {
       <div className='border'>
         <h1>{order}. {item.name}</h1>
         <p>{item.description}</p>
-        <button>Edit</button>
+        <button>Edit</button><button onClick={handleDelete}>Delete</button>
       </div>
       <div className='border inline'>
         <p>Stock: {stockCount}</p>
@@ -61,6 +69,7 @@ const InventoryList = () => {
 
   const [invetoryList, setInventory] = useState(null)
   const [isError, setIsError] = useState(false)
+  const [updateInvetory, setUpdateInventory] = useState(false)
 
   useEffect(() => {
     const getInventory = async () => {
@@ -74,7 +83,7 @@ const InventoryList = () => {
       }
     }
     getInventory()
-  }, [])
+  }, [updateInvetory])
 
 
   return (
@@ -83,7 +92,7 @@ const InventoryList = () => {
         :
         invetoryList ? invetoryList.map((item, i) => {
           return (
-            <InventoryItem item={item} key={i} order={i + 1} />
+            <InventoryItem item={item} key={i} order={i + 1} updateInvetory={updateInvetory} setUpdateInventory={setUpdateInventory} />
           )
         }) : 'Laoding...'}
     </>
