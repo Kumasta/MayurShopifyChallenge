@@ -1,7 +1,8 @@
 import express from 'express'
 
 // Controllers
-import { getAllInventory, addInventory, getSingleInventory, updateInventory, deleteInventory, addComment, deleteComment } from '../controllers/inventory.js'
+import { getAllInventory, addInventory, getSingleInventory, updateInventory, deleteInventory } from '../controllers/inventory.js'
+import { addComment, deleteComment, restoreComment } from '../controllers/comments.js'
 
 
 const router = express.Router()
@@ -23,7 +24,7 @@ router.route('/inventory/:id/comments')
 
 router.route('/inventory/:id/comments/:commentId')
   .delete(deleteComment)
-// .delete(restoreComment)
+  .patch(restoreComment)
 
 
 export default router

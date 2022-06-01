@@ -19,7 +19,7 @@ const inventorySchema = new Schema({
   name: { type: String, required: true, unique: true },
   description: { type: String, required: true, maxlength: 500 },
   stock: { type: Number, required: true, default: 0, min: 0 },
-  imageUrl: { type: String, required: false },
+  // imageUrl: { type: String, required: false },
   comments: [commentSchema],
 }, {
   timestamps: true,

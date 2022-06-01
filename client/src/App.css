@@ -1,0 +1,17 @@
+.App {
+}
+
+.border {
+  border: 1px black solid;
+}
+
+.inventoryCard {
+  max-width: 30rem;
+  border-color: blue;
+  margin: 10px;
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+}

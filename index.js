@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import router from './config/routes.js'
 import { port, dbURI } from './config/environment.js'
+import cors from 'cors'
 
 const app = express()
 
@@ -14,6 +15,10 @@ const startServer = async () => {
     // --Middleware--
     // JSON Parser
     app.use(express.json())
+
+
+    app.use(cors())
+
 
     // Logger
     app.use((req, _res, next) => {
