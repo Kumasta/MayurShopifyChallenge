@@ -23,8 +23,8 @@ router.route('/inventory/:id/comments')
   .post(addComment) //✅
 
 router.route('/inventory/:id/comments/:commentId')
-  .delete(deleteComment)
-  .patch(restoreComment)
+  .delete(deleteComment) //✅
+  .patch(restoreComment) //✅
 
 
 export default router
