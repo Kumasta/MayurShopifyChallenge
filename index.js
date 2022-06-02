@@ -1,9 +1,14 @@
 import express from 'express'
 import mongoose from 'mongoose'
-// import path from 'express/lib/application.js'
+// import path from 'path'
 import router from './config/routes.js'
 import { port, dbURI } from './config/environment.js'
 import cors from 'cors'
+import { fileURLToPath } from 'url'
+
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
+
 
 const app = express()
 
@@ -14,6 +19,7 @@ const startServer = async () => {
     console.log('Mongodb connected')
 
     // --Middleware--
+    // app.use(express.static(path.join(__dirname, 'client', 'build')))
     app.use(cors())
 
 
