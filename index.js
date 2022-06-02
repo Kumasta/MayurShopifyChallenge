@@ -7,6 +7,9 @@ import cors from 'cors'
 const app = express()
 
 const startServer = async () => {
+
+  // console.log(__dirname)
+
   try {
     // Attempt mongodb connection
     await mongoose.connect(dbURI)
