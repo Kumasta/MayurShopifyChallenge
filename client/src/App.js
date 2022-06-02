@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
+// import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import axios from 'axios'
+import './App.css'
 
 
 const CommentCard = ({ comment, i, item, updateInvetory, setUpdateInventory }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/inventory/${item.id}/comments/${comment.id}`)
+      await axios.delete(`http://localhost:4000/inventory/${item.id}/comments/${comment.id}`)
       setUpdateInventory(!updateInvetory)
     } catch (err) {
       console.log(err)
@@ -15,7 +17,7 @@ const CommentCard = ({ comment, i, item, updateInvetory, setUpdateInventory }) =
 
   const handleRestore = async () => {
     try {
-      await axios.patch(`/api/inventory/${item.id}/comments/${comment.id}`)
+      await axios.patch(`http://localhost:4000/inventory/${item.id}/comments/${comment.id}`)
       setUpdateInventory(!updateInvetory)
     } catch (err) {
       console.log(err)
@@ -53,7 +55,7 @@ const EditInventory = ({ item, updateInvetory, setUpdateInventory, setIsEdit }) 
 
   const handleSubmit = async () => {
     try {
-      const { data } = await axios.put(`/api/inventory/${item.id}`,
+      const { data } = await axios.put(`http://localhost:4000/inventory/${item.id}`,
         newInventory
       )
       console.log(data)
@@ -82,8 +84,7 @@ const EditInventory = ({ item, updateInvetory, setUpdateInventory, setIsEdit }) 
 
 const InventoryCard = ({ item, order, updateInvetory, setUpdateInventory }) => {
 
-  // eslint-disable-next-line prefer-const
-  let [stockCount, setStockCount] = useState(item.stock)
+  let [stockCount, setStockCouint] = useState(item.stock)
   const [isEdit, setIsEdit] = useState(false)
 
   const handleEdit = () => {
@@ -91,19 +92,19 @@ const InventoryCard = ({ item, order, updateInvetory, setUpdateInventory }) => {
   }
 
   const handlePlus = () => {
-    setStockCount(stockCount += 1)
+    setStockCouint(stockCount += 1)
     updateStock()
   }
 
   const handleMinus = () => {
     if (stockCount === 0) return
-    setStockCount(stockCount -= 1)
+    setStockCouint(stockCount -= 1)
     updateStock()
   }
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/inventory/${item.id}`)
+      await axios.delete(`http://localhost:4000/inventory/${item.id}`)
       setUpdateInventory(!updateInvetory)
     } catch (err) {
       console.log(err)
@@ -112,7 +113,7 @@ const InventoryCard = ({ item, order, updateInvetory, setUpdateInventory }) => {
 
   const updateStock = async () => {
     try {
-      const { data } = await axios.put(`/api/inventory/${item.id}`,
+      const { data } = await axios.put(`http://localhost:4000/inventory/${item.id}`,
         { stock: stockCount }
       )
       console.log(data)
@@ -131,7 +132,7 @@ const InventoryCard = ({ item, order, updateInvetory, setUpdateInventory }) => {
   const handleNewComment = async (e) => {
     e.preventDefault()
     try {
-      const { data } = await axios.post(`/api/inventory/${item.id}/comments`,
+      const { data } = await axios.post(`http://localhost:4000/inventory/${item.id}/comments`,
         { text: commentBody }
       )
       setUpdateInventory(!updateInvetory)
@@ -172,7 +173,7 @@ const InventoryForm = ({ updateInvetory, setUpdateInventory }) => {
   const [newInventory, setNewInventory] = useState({
     name: '',
     description: '',
-    stock: 0,
+    stock: 0
   })
 
   const handleChange = (e) => {
@@ -182,14 +183,14 @@ const InventoryForm = ({ updateInvetory, setUpdateInventory }) => {
 
   const handleSubmit = async () => {
     try {
-      const { data } = await axios.post('/api/inventory',
+      const { data } = await axios.post(`http://localhost:4000/inventory`,
         newInventory
       )
       console.log(data)
       setNewInventory({
         name: '',
         description: '',
-        stock: 0,
+        stock: 0
       })
       setUpdateInventory(!updateInvetory)
     } catch (err) {
@@ -221,7 +222,7 @@ const InventoryList = ({ updateInvetory, setUpdateInventory }) => {
   useEffect(() => {
     const getInventory = async () => {
       try {
-        const { data } = await axios.get('/api/inventory')
+        const { data } = await axios.get('http://localhost:4000/inventory')
         setInventory(data)
         console.log(data)
       } catch (err) {
@@ -256,8 +257,8 @@ const App = () => {
       <InventoryForm updateInvetory={updateInvetory} setUpdateInventory={setUpdateInventory} />
       <InventoryList updateInvetory={updateInvetory} setUpdateInventory={setUpdateInventory} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
 
