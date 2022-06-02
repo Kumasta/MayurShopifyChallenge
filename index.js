@@ -1,6 +1,5 @@
 import express from 'express'
 import mongoose from 'mongoose'
-// import path from 'path'
 import router from './config/routes.js'
 import { port, dbURI } from './config/environment.js'
 import cors from 'cors'
@@ -18,7 +17,6 @@ const startServer = async () => {
 
 
     // JSON Parser
-    app.use(express.static('build'))
     app.use(express.json())
 
     // Logger
