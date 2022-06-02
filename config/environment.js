@@ -1,3 +1,2 @@
-export const port = 4000 // Sets the Node port
-export const dbURI = 'mongodb://127.0.0.1:27017/shoppify' // Sets the address for the database we're connecting to
-export const secret = 'Mayur Shoppify test secret'
+export const port = process.env.PORT || 4000 // Sets the Node port
+export const dbURI = 'mongodb+srv://Kumasta:IR0Brfgj3Hu7N4Tb@cluster0.qqrz8.mongodb.net/?retryWrites=true&w=majority'  // Sets the address for the database we're connecting to

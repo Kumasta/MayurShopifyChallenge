@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+// import path from 'express/lib/application.js'
 import router from './config/routes.js'
 import { port, dbURI } from './config/environment.js'
 import cors from 'cors'
@@ -13,12 +14,12 @@ const startServer = async () => {
     console.log('Mongodb connected')
 
     // --Middleware--
-    // JSON Parser
-    app.use(express.json())
-
-
     app.use(cors())
 
+
+    // JSON Parser
+    app.use(express.static('build'))
+    app.use(express.json())
 
     // Logger
     app.use((req, _res, next) => {
@@ -27,7 +28,8 @@ const startServer = async () => {
     })
 
     // Routes
-    app.use(router)
+    app.use('/api', router)
+
 
     // Catch All
     app.use((_req, res) => {
