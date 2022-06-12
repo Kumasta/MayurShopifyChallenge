@@ -7,6 +7,12 @@ export default [
     comments: [
       {
         text: 'This is the first comment.',
+      },
+      {
+        text: 'This is the second comment.',
+      },
+      {
+        text: 'This is the third comment.',
       }
     ],
   },
@@ -15,13 +21,21 @@ export default [
     description: 'A bottle of wine.',
     stock: 5,
     // imageUrl: 'image.com',
-    comments: [],
+    comments: [
+      {
+        text: 'Running low on wine, order more',
+      }
+    ],
   },
   {
-    name: 'placeholder',
-    description: 'placeholder',
+    name: 'Crackers',
+    description: 'A pack of crackers',
     stock: 0,
     // imageUrl: 'placeholder',
-    comments: [],
+    comments: [
+      {
+        text: 'Suppplier no longer sells crackers!',
+      }
+    ],
   }
 ]

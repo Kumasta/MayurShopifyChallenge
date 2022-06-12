@@ -1,7 +1,7 @@
 import express from 'express'
 
 // Controllers
-import { getAllInventory, addInventory, getSingleInventory, updateInventory, deleteInventory } from '../controllers/inventory.js'
+import { getAllInventory, addInventory, getSingleInventory, updateInventory, deleteInventory, restoreInventory } from '../controllers/inventory.js'
 import { addComment, deleteComment, restoreComment } from '../controllers/comments.js'
 
 
@@ -17,6 +17,7 @@ router.route('/inventory/:id')
   .get(getSingleInventory) //✅
   .put(updateInventory) //✅
   .delete(deleteInventory) //✅
+  .patch(restoreInventory)
 
 // Comments
 router.route('/inventory/:id/comments')

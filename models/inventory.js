@@ -20,6 +20,7 @@ const inventorySchema = new Schema({
   description: { type: String, maxlength: 500 },
   stock: { type: Number, required: true, default: 0, min: 0 },
   // imageUrl: { type: String, required: false },
+  deletedComment: { type: String, required: false, default: '' },
   comments: [commentSchema],
 }, {
   timestamps: true,
@@ -36,6 +37,7 @@ commentSchema.set('toJSON', {
 
 // Plugins
 inventorySchema.plugin(uniqueValidator)
+inventorySchema.plugin(mongooseDelete)
 commentSchema.plugin(mongooseDelete)
 
 export default mongoose.model('Inventory', inventorySchema)
