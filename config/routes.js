@@ -17,7 +17,7 @@ router.route('/inventory/:id')
   .get(getSingleInventory) //✅
   .put(updateInventory) //✅
   .delete(deleteInventory) //✅
-  .patch(restoreInventory)
+  .patch(restoreInventory) //✅
 
 // Comments
 router.route('/inventory/:id/comments')
